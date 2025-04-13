@@ -5,8 +5,8 @@ using System.IO;
 public class MainManager : MonoBehaviour
 {
     // Start() and Update() methods deleted - we don't need them right now
-
-    public static MainManager Instance;//此关键字表示存储在该类成员中的值将由该类的所有实例共享。 
+    // add private setter/
+    public static MainManager Instance { get; private set; }//此关键字表示存储在该类成员中的值将由该类的所有实例共享。 
     public Color TeamColor; // new variable declared
     private void Awake()//特殊方法：该方法在创建对象后立即调用：
     {
