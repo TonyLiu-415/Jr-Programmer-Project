@@ -1,17 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;//场景加载需要的命名空间
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
-// Sets the script to be executed later than all default scripts
-// This is helpful for UI, since other things may need to be initialized before setting the UI
-[DefaultExecutionOrder(1000)]
 public class MenuUIHandler : MonoBehaviour
 {
     public ColorPicker ColorPicker;
@@ -43,17 +37,13 @@ public class MenuUIHandler : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-    public void Exit()//关闭应用程序
+    public void Exit()
     {
-        MainManager.Instance.SaveColor();
-
-        //所有以 # 开头的行都不是真正的 “code”。它们不会被编译和执行 — 它们实际上是编译器的指令。
-
-#if UNITY_EDITOR//更改代码以根据应用程序的运行位置运行不同的行
-        EditorApplication.ExitPlaymode();//如果是编译模式，那么执行退出Playmode指令
-    #else
-            Application.Quit(); // original code to quit Unity player
-    #endif
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit(); // original code to quit Unity player
+#endif
     }
     public void SaveColorClicked()
     {
